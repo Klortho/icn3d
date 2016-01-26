@@ -71,6 +71,15 @@ Then point your browser at http://localhost:8080/icn3d.html.
 
 Run `gulp help` to get a list of the available tasks.
 
+A special task "gh-pages" will build the distribution files, and then push
+them to GitHub pages. Make sure, in your working clone, that you define a 
+remote named "github" that points to a repo on GitHub that you have write
+permission to, and then enter
+
+```
+gulp gh-pages
+```
+
 
 ## Change log
 
