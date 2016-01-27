@@ -1,0 +1,62 @@
+<!--
+  Test file to try out the simple example from the help document, but with
+  local copy of the distribution files.
+-->
+
+<html>
+  <head>
+<!--
+  This is what is in the help file:
+
+  <link rel="stylesheet"
+    href="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery-ui.min.css">
+  <link rel="stylesheet"
+    href="https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d_full_ui.css">
+    <script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery.min.js"></script>
+  <script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery-ui.min.js"></script>
+  <script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/three.min.js"></script>
+  <script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/surface.min.js"></script>
+  <script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/full_ui_all.min.js"></script>
+-->
+<!--
+  Same thing, but substitute local files
+-->
+  <link rel="stylesheet"
+    href="../lib/jquery-ui.min.css">
+  <link rel="stylesheet"
+    href="../icn3d_full_ui.css">
+  <script src="../lib/jquery.min.js"></script>
+  <script src="../lib/jquery-ui.min.js"></script>
+  <script src="../lib/three.min.js"></script>
+  <script src="../surface.min.js"></script>
+  <script src="../full_ui_all.min.js"></script>
+
+  </head>
+  <body>
+  <p>icn3d</p>
+
+  <div id="icn3dwrap"></div>
+
+  <script type="text/javascript">
+          $( document ).ready(function() {
+                var cfg = {
+                    divid: 'icn3dwrap',
+                    pdbid: '2por',
+                    width: '100%',
+                    height: '100%',
+                    resize: true,
+                    rotate: true,
+                    showmenu: true
+                };
+                cfg['pdbid'] = '2por';
+
+                var icn3dui = new iCn3DUI(cfg);
+
+                //communicate with the 3D viewer with chained functions
+                $.when(icn3dui.show3DStructure()).then(function() {
+                     //icn3dui.setOption('color', 'cyan');
+                });
+          });
+        </script>
+  </body>
+</html>
