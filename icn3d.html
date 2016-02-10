@@ -3,7 +3,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta name="description" content="iCn3D Structure Viewer">
 <meta name="ncbi_db" content="structure">
-<meta name="keywords" content="NCBI, Structure, iCn3D, 3D, Viewer">
+<meta name="keywords" content="NCBI, Structure, iCn3D, 3D, Viewer, WebGL, three.js, sequence, chemical">
 <meta name="robots" content="index,follow,noarchive">
 <title>iCn3D Structure Viewer</title>
 
@@ -12,7 +12,9 @@
   <script src="lib/jquery.min.js"></script>
   <script src="lib/jquery-ui.min.js"></script>
   <script src="lib/three.min.js"></script>
-  <script src="surface.min.js"></script>
+  
+  
+  
   
   
   
@@ -52,18 +54,18 @@ body {font-family: Verdana, Arial, Helvetica, sans-serif;}
     </ol>
     <br>
 <li><a href="#HowToUse">How to use iCn3D Structure Viewer in your html page</a></li>
-	<ul>
-	<li><a href="#embedIframe">Embed using IFrame</a></li>
-	<li><a href="#embedJS">Embed using Javascript</a><br>
-		<ol>
-		<li><a href="#HowToUseStep1">Include three.js and jQuery javascript libraries in the &lt;head&gt; of your html page</a></li>
-		<li><a href="#HowToUseStep2">Position the widget with an html div</a></li>
-		<li><a href="#HowToUseStep3">Initialize the widget with desired parameters</a></li>
-		<li><a href="#HowToUseStep4">Hint for rotating/translating/zooming the 3D structure</a></li>
-		<li><a href="#HowToUseStep5">Hint for recovering a crashed page</a></li>
-		</ol>
-	</li>
-	</ul>
+    <ul>
+    <li><a href="#embedIframe">Embed using IFrame</a></li>
+    <li><a href="#embedJS">Embed using Javascript</a><br>
+        <ol>
+        <li><a href="#HowToUseStep1">Include three.js and jQuery javascript libraries in the &lt;head&gt; of your html page</a></li>
+        <li><a href="#HowToUseStep2">Position the widget with an html div</a></li>
+        <li><a href="#HowToUseStep3">Initialize the widget with desired parameters</a></li>
+        <li><a href="#HowToUseStep4">Hint for rotating/translating/zooming the 3D structure</a></li>
+        <li><a href="#HowToUseStep5">Hint for recovering a crashed page</a></li>
+        </ol>
+    </li>
+    </ul>
 <br>
 <li><a href="#commands">Commands in URLs and scripts for the advanced interface</a>
     <ul>
@@ -109,7 +111,8 @@ body {font-family: Verdana, Arial, Helvetica, sans-serif;}
 
 <a href="#addHighlightObjects">addHighlightObjects</a><br>
 <a href="#applyDisplayOptions">applyDisplayOptions</a><br>
-<a href="#applyOptions">applyOptions</a><br>
+<a href="#applyOtherOptions">applyOtherOptions</a><br>
+<a href="#applySurfaceOptions">applySurfaceOptions</a><br>
 <a href="#applyTransformation">applyTransformation</a><br>
 <a href="#buildAxes">buildAxes</a><br>
 <a href="#calculateLigandHbonds">calculateLigandHbonds</a><br>
@@ -122,10 +125,10 @@ body {font-family: Verdana, Arial, Helvetica, sans-serif;}
 <a href="#createSphereRepresentation">createSphereRepresentation</a><br>
 <a href="#createStickRepresentation">createStickRepresentation</a><br>
 <a href="#createStrand">createStrand</a><br>
-<a href="#createSurfaceRepresentation">createSurfaceRepresentation</a><br>
 </td>
 
 <td valign="top">
+<a href="#createSurfaceRepresentation">createSurfaceRepresentation</a><br>
 <a href="#createTube">createTube</a><br>
 <a href="#draw">draw</a><br>
 <a href="#drawCartoonNucleicAcid">drawCartoonNucleicAcid</a><br>
@@ -137,14 +140,14 @@ body {font-family: Verdana, Arial, Helvetica, sans-serif;}
 <a href="#rebuildScene">rebuildScene</a><br>
 <a href="#render">render</a><br>
 <a href="#removeHighlightObjects">removeHighlightObjects</a><br>
-<a href="#residuehref2Abbr">residuehref2Abbr</a><br>
+<a href="#residueName2Abbr">residueName2Abbr</a><br>
 <a href="#rotateDown">rotateDown</a><br>
 <a href="#rotateLeft">rotateLeft</a><br>
 <a href="#rotateRight">rotateRight</a><br>
-<a href="#rotateStructure">rotateStructure</a><br>
 </td>
 
 <td valign="top">
+<a href="#rotateStructure">rotateStructure</a><br>
 <a href="#rotateUp">rotateUp</a><br>
 <a href="#saveFile">saveFile</a><br>
 
@@ -332,7 +335,6 @@ We provided two versions of iCn3D widgets: <a href="index.html?mmdbid=2por">simp
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery-ui.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/three.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/surface.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/simple_ui_all.min.js"&gt;&lt;/script&gt;</pre>
     </li>
     <li><p>Advanced UI:</p>
@@ -341,7 +343,6 @@ We provided two versions of iCn3D widgets: <a href="index.html?mmdbid=2por">simp
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/jquery-ui.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/lib/three.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/surface.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://www.ncbi.nlm.nih.gov/Structure/icn3d/full_ui_all.min.js"&gt;&lt;/script&gt;</pre>
     </li>
     </ul>
@@ -487,6 +488,7 @@ Besides the "Script/Log" section, commands can also be attached to the url param
 <tr><td><span class="indent">Display Selection:</span></td>  <td>show selection</td></tr>
 
 <tr><td colspan="2"><br>b) Select -&gt; Picking</td></tr>
+<tr><td><span class="indent">Strand/Helix:</span></td>  <td>set picking strand</td></tr>
 <tr><td><span class="indent">Residue:</span></td>  <td>set picking residue</td></tr>
 <tr><td><span class="indent">Atom:</span></td>     <td>set picking atom</td></tr>
 <tr><td><span class="indent">Pick:</span></td>     <td>pickatom [atom.serial]</td></tr>
@@ -566,12 +568,11 @@ Different selections can be concatenated using semicolon, e.g., ":1-10; :Lys" se
 <table>
 <tbody><tr><td colspan="2">a)</td></tr>
 <tr><td>Color -&gt; spectrum:</td>  <td>color spectrum</td></tr>
-<tr><td>Color -&gt; chain:</td>     <td>color chain</td></tr>
 <tr><td>Color -&gt; secondary structure:</td> <td>color secondary structure</td></tr>
-<tr><td>Color -&gt; B factor:</td>  <td>color B factor</td></tr>
+<tr><td>Color -&gt; charge:</td>  <td>color charge</td></tr>
+<tr><td>Color -&gt; chain:</td>     <td>color chain</td></tr>
 <tr><td>Color -&gt; residue:</td>   <td>color residue</td></tr>
-<tr><td>Color -&gt; polarity:</td>  <td>color polarity</td></tr>
-<tr><td>Color -&gt; atom:</td>      <td>color atom</td></tr>
+<tr><td>Color -&gt; atom:</td>  <td>color atom</td></tr>
 
 <tr><td colspan="2"><br>b) Color -&gt; Unicolor</td></tr>
 <tr><td><span class="indent">red:</span></td>                <td>color red</td></tr>
@@ -589,18 +590,14 @@ Different selections can be concatenated using semicolon, e.g., ":1-10; :Lys" se
 <br>
 <a name="surface"></a><b>5. Surface</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
 <table>
-<tbody><tr><td colspan="2">a) Surface -&gt; Show Surface</td></tr>
-<tr><td><span class="indent">yes:</span></td>                <td>set surface on</td></tr>
-<tr><td><span class="indent">no:</span></td>                 <td>set surface off</td></tr>
-
-<tr><td colspan="2"><br>b) Surface -&gt; Type</td></tr>
+<tbody><tr><td colspan="2"><br>a) Surface -&gt; Type</td></tr>
 <tr><td><span class="indent">Van der Waals surface:</span></td>      <td>set surface Van der Waals surface</td></tr>
 <tr><td><span class="indent">solvent excluded surface:</span></td>   <td>set surface solvent excluded surface</td></tr>
 <tr><td><span class="indent">solvent accessible surface:</span></td> <td>set surface solvent accessible surface</td></tr>
 <tr><td><span class="indent">molecular surface:</span></td>          <td>set surface molecular surface</td></tr>
 <tr><td><span class="indent">hide:</span></td>                    <td>set surface nothing</td></tr>
 
-<tr><td colspan="2"><br>c) Surface -&gt; Opacity</td></tr>
+<tr><td colspan="2"><br>b) Surface -&gt; Opacity</td></tr>
 <tr><td><span class="indent">1.0:</span></td>                <td>set surface opacity 1.0</td></tr>
 <tr><td><span class="indent">0.9:</span></td>                <td>set surface opacity 0.9</td></tr>
 <tr><td><span class="indent">0.8:</span></td>                <td>set surface opacity 0.8</td></tr>
@@ -608,9 +605,13 @@ Different selections can be concatenated using semicolon, e.g., ":1-10; :Lys" se
 <tr><td><span class="indent">0.6:</span></td>                <td>set surface opacity 0.6</td></tr>
 <tr><td><span class="indent">0.5:</span></td>                <td>set surface opacity 0.5</td></tr>
 
-<tr><td colspan="2"><br>d) Surface -&gt; Wireframe</td></tr>
-<tr><td><span class="indent">yes</span></td>                 <td>set surface wireframe on</td></tr>
-<tr><td><span class="indent">no</span></td>                  <td>set surface wireframe off</td></tr>
+<tr><td colspan="2"><br>c) Surface -&gt; Wireframe</td></tr>
+<tr><td><span class="indent">Yes</span></td>                 <td>set surface wireframe on</td></tr>
+<tr><td><span class="indent">No</span></td>                  <td>set surface wireframe off</td></tr>
+
+<tr><td colspan="2">a) Surface -&gt; Neighbors</td></tr>
+<tr><td><span class="indent">Yes:</span></td>                <td>set surface neighbors on</td></tr>
+<tr><td><span class="indent">No:</span></td>                 <td>set surface neighbors off</td></tr>
 </tbody></table>
 <br>
 <a name="other"></a><b>6. Other</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
@@ -738,7 +739,7 @@ Different selections can be concatenated using semicolon, e.g., ":1-10; :Lys" se
       <pre>          var options = {};
           options['camera']             = 'perspective';        //perspective, orthographic
           options['background']         = 'black';              //black, grey, white
-          options['color']              = 'spectrum';           //spectrum, chain, secondary structure, B factor, residue, polarity, atom, red, green, blue, magenta, yellow, cyan, white, grey, custom
+          options['color']              = 'spectrum';           //spectrum, secondary structure, charge, chain, residue, atom, red, green, blue, magenta, yellow, cyan, white, grey, custom
           options['secondary']          = 'ribbon';             //ribbon, strand, cylinder &amp; plate, C alpha trace, B factor tube, lines, stick, ball &amp; stick, sphere, nothing
           options['nucleotides']        = 'phosphorus trace';   //cartoon, phosphorus trace, lines, stick, ball &amp; stick, sphere, nothing
           options['ligands']            = 'stick';              //line, stick, ball &amp; stick, sphere
@@ -751,7 +752,7 @@ Different selections can be concatenated using semicolon, e.g., ":1-10; :Lys" se
           options['labels']             = 'no';                 //yes, no
           options['lines']              = 'no';                 //yes, no
           options['axis']               = 'no';                 //yes, no
-          options['picking']            = 'atom';               //no, atom, residue
+          options['picking']            = 'atom';               //no, atom, residue, strand
           options['surfaceregion']      = 'nothing';            //nothing, all, sphere
       </pre>
     </li>
@@ -796,7 +797,7 @@ This defines the highlight color using the outline method. It can be defined usi
 When two atoms are required to be selected (e.g., for measuring distance), "pickedatom2" has the value of the atom index of the 2nd picked atom.<br>
 <br>
 <a name="picking"></a><b>picking</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
-If its value is 1, picking any atom will select the atom. If its value is 2, picking any atom will select the residue containing this atom. If its value is 0, no picking will work.<br>
+If its value is 1, picking any atom will select the atom. If its value is 2, picking any atom will select the residue containing this atom. If its value is 3, picking any atom will select the strand or helix or coil containing this atom. If its value is 0, no picking will work.<br>
 <br>
 
 <span style="font-weight:bold; font-size:1.2em;">Methods</span> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
@@ -808,8 +809,11 @@ Show the highlight for the selected atoms: <a href="#highlightAtoms">highlightAt
 <a name="applyDisplayOptions"></a><b>applyDisplayOptions(options, atoms)</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
 Apply style options to a certain set of atoms.<br>
 <br>
-<a name="applyOptions"></a><b>applyOptions(options)</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
-Apply all options to a certain set of atoms.<br>
+<a name="applyOtherOptions"></a><b>applyOtherOptions(options)</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
+Apply the rest options (e.g., label, distance, etc) except diplay and surface option to a certain set of atoms.<br>
+<br>
+<a name="applySurfaceOptions"></a><b>applySurfaceOptions(options)</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
+Apply the surface options to a certain set of atoms.<br>
 <br>
 <a name="applyTransformation"></a><b>applyTransformation()</b> <a href="#Top"><span class="top">&nbsp;&nbsp;&nbsp;</span></a><br>
 Update the rotation, translation, and zooming before rendering. Typically used before the function render().<br>
