@@ -3623,6 +3623,10 @@ iCn3DUI.prototype = {
 
         html += "</div>";
 
+        html += "<div id='" + me.pre + "dl_2ddiagram'>";
+      html += '<svg width="300" height="300">   <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /> </svg>';
+        html += "</div>";
+
         if(me.cfg.align !== undefined) {
           html += "<div id='" + me.pre + "dl_alignment'>";
           html += "  <div id='" + me.pre + "dl_sequence2' class='icn3d-dl_sequence'>";
@@ -3840,7 +3844,9 @@ iCn3DUI.prototype = {
         var buttonStyle = me.isMobile() ? 'none' : 'button';
 
         if(me.cfg.cid === undefined) {
-            html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_sequences'><span style='white-space:nowrap' class='icn3d-commandTitle' title='Show the sequences of the selected structure'>View<br/>Sequence</span></button></div></td>";
+            html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_sequences'><span style='white-space:nowrap' class='icn3d-commandTitle' title='the selected structure'>View<br/>Sequence</span></button></div></td>";
+
+            html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_2ddiagram'><span style='white-space:nowrap' class='icn3d-commandTitle' title='Show the sequences of the selected structure'>View<br/>2D Diagram</span></button></div></td>";
 
             if(me.cfg.align !== undefined) {
                 html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_alignsequences'><span style='white-space:nowrap' class='icn3d-commandTitle' title='Show the sequences of the aligned structures'>Aligned<br/>Sequence</span></button></div></td>";
@@ -6102,6 +6108,15 @@ iCn3DUI.prototype = {
         });
     },
 
+    clickShow_2ddiagram: function() { var me = this;
+        $("#" + me.pre + "show_2ddiagram").click(function(e) {
+    //       e.preventDefault();
+
+             me.openDialog(me.pre + 'dl_2ddiagram', '2D Diagram');
+        });
+    },
+
+
     clickShow_alignsequences: function() { var me = this;
         $("#" + me.pre + "show_alignsequences").click(function(e) {
     //       e.preventDefault();
@@ -7034,6 +7049,7 @@ iCn3DUI.prototype = {
         me.clickCustomAtoms();
         me.clickShow_selected();
         me.clickShow_sequences();
+        me.clickShow_2ddiagram();
         me.clickShow_alignsequences();
         me.clickShow_selected_atom();
         me.clickCommand_apply();
@@ -7874,7 +7890,7 @@ iCn3DUI.prototype = {
                 var bondType = bondArray[3];
                 var finalBondType = bondType;
 
-                //• 1 = single • 2 = double • 3 = triple • am = amide • ar = aromatic • du = dummy • un = unknown (cannot be determined from the parameter tables) • nc = not connected
+                //ï¿½ 1 = single ï¿½ 2 = double ï¿½ 3 = triple ï¿½ am = amide ï¿½ ar = aromatic ï¿½ du = dummy ï¿½ un = unknown (cannot be determined from the parameter tables) ï¿½ nc = not connected
                 if(bondType === 'am') {
                     finalBondType = '1';
                 }
