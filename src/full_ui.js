@@ -93,6 +93,8 @@ var iCn3DUI = function(cfg) {
 
     me.bInitial = true;
 
+    me.intrac={};
+    me.molid2color = {};
 };
 
 iCn3DUI.prototype = {
@@ -7380,6 +7382,8 @@ iCn3DUI.prototype = {
               }
           }
        });
+       // download the intrac data.
+       me.downloadIntrac(pdbid);
     };
 
     iCn3DUI.prototype.loadPdbData = function(data) {
@@ -8355,6 +8359,19 @@ iCn3DUI.prototype = {
         return true;
     };
 
+    iCn3DUI.prototype.downloadIntrac = function(mmdbid) {var me = this;
+        var url="http://www.ncbi.nlm.nih.gov/Structure/mmdb2/mmdb_strview.cgi?uid=1tup&format=json&intrac=1";
+        $.ajax({
+            url: url,
+            dataType: 'jsonp',
+            success: function( data ) {
+            me.icn3d.intrac = data;
+            console.log("intrac data:", me.intrac);
+        }
+      });
+      return true;
+    };
+
     iCn3DUI.prototype.downloadMmdb = function (mmdbid, bGi) { var me = this;
        var url;
        if(bGi !== undefined && bGi) {
@@ -8397,6 +8414,13 @@ iCn3DUI.prototype = {
           success: function(data) {
             var id = (data.pdbId !== undefined) ? data.pdbId : data.mmdbId;
             me.inputid = id;
+
+            // molid2color
+            for(var i in data.molid2rescount) {
+                var color = '#' + ( '000000' + data.molid2rescount[i].color.toString( 16 ) ).slice( - 6 );
+                  me.molid2color[i] = color;
+            }
+            console.log(me.molid2color);
 
             if ((me.cfg.inpara !== undefined && me.cfg.inpara.indexOf('mols=') != -1) || (data.atomcount <= data.threshold && data.atoms !== undefined) ) {
                 // small structure with all atoms
@@ -8661,6 +8685,7 @@ iCn3DUI.prototype = {
             }
           }
         });
+      me.downloadIntrac(mmdbid);
     };
 
     iCn3DUI.prototype.downloadGi = function (gi) { var me = this;
