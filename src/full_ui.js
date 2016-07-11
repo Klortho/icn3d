@@ -3626,7 +3626,8 @@ iCn3DUI.prototype = {
         html += "</div>";
 
         html += "<div id='" + me.pre + "dl_2ddiagram'>";
-      html += '<svg width="300" height="300">   <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /> </svg>';
+        //html += '<svg width="300" height="300">   <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /> </svg>';
+        html += "<div id='" + me.pre + "cy'></div>";
         html += "</div>";
 
         if(me.cfg.align !== undefined) {
@@ -9625,4 +9626,55 @@ iCn3DUI.prototype = {
         if(me.cfg.height.toString().indexOf('%') === -1) {
             me.HEIGHT = parseInt(me.cfg.height) + me.EXTRAHEIGHT + me.LESSHEIGHT;
         }
+    };
+    
+    iCn3DUI.prototype.intracToCytoscape = function(intrac) {
+      var nodes = [];
+      var edges = [];
+      for (var name in intrac) {
+        if (intrac.hasOwnProperty(name)) {
+          var props = intrac[name];
+          var x,y;
+          if(props.shape == "rect") {
+            x = (props.coords[0][0] + props.coords[0][2])/2;
+            y = (props.coords[0][1] + props.coords[0][3])/2;
+          } else if(props.shape == "circle") {
+            x = props.coords[0][0];
+            y = props.coords[0][1];
+          } else if(props.shape == "poly") {
+            //TODO
+            x = props.coords[0][0];
+            y = props.coords[0][1];
+          } else {
+            console.log("Ignoring "+name+" due to unknown shape "+props.shape);
+          }
+          var node = {
+            "data" : {
+              "id" : name,
+              "label" : name,
+            },
+            "position" : {
+              "x":x,
+              "y":y},
+            "selected" : false
+          };
+          nodes.push(node);
+          if(props.intrac) {
+            for( var t in props.intrac){
+              var edge = {
+                "data" : {
+                  "source": name,
+                  "target": t
+                }
+              };
+              edges.push(edge);
+            }
+          }
+        }
+      }
+  
+      return {
+        "nodes":nodes,
+        "edges":edges
+      };
     };

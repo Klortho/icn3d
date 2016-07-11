@@ -7,6 +7,15 @@
 <meta name="keywords" content="NCBI, Structure, iCn3D, 3D, Viewer, WebGL, three.js, sequence, chemical">
 <meta name="robots" content="index,follow,noarchive">
 <title>iCn3D Structure Viewer</title>
+  <style>
+#div0_cy {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+  </style>
 </head>
 <body>
   <div id="div0"></div>
@@ -27,6 +36,7 @@
   <script src="src/setupsurface.js"></script>
   <script src="src/icn3d.js"></script>
   <script src="src/full_ui.js"></script>
+  <script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
 
   <script type="text/javascript">
 
@@ -133,6 +143,66 @@
           var icn3dui = new iCn3DUI(cfg);
 
           icn3dui.show3DStructure();
+
+          var elems = {
+            "nodes" : [ {
+              "data" : {
+                "id" : "1",
+                "name" : "1",
+              },
+              "position" : {
+                "x" : -13.097525038320441,
+                "y" : 283.0525113278014
+              },
+            },{
+              "data" : {
+                "id" : "2",
+                "name" : "2",
+              },
+              "position" : {
+                "x" : -13.097525038320441,
+                "y" : 0.0525113278014
+              },
+            }],
+            "edges":[{
+              "data" : {
+                "source" : "1",
+                "target" : "2",
+              },
+            } ]
+          };
+//           var elems = icn3dui.intrac;
+          icn3dui.molid2color;
+
+          var div = $('#'+icn3dui.pre+'cy');
+          var cy = cytoscape({
+            container: $('#'+icn3dui.pre+'cy')[0],
+            boxSelectionEnabled: false,
+            autounselectify: true,
+
+            elements: elems,
+  
+            //   layout: {
+            //     name: 'cose',
+            //     padding: 10
+            //   }
+            layout: {
+                name: 'preset',
+                padding: 10
+              }
+            });
+
+
+
+          cy.on('tap', 'node', function(){
+            try { // your browser may block popups
+              console.log('You clicked node: ' + this.data('id'));
+              console.log('Type is: ' + this.data('type'));
+            } catch(e){ // fall back on url change
+              window.location.href = this.data('href'); 
+            } 
+          });
+          
         }
       }
 
@@ -163,6 +233,8 @@
           icn3dui.show3DStructure();
       }
 
+
+  
     }); // document ready
 
   </script>
