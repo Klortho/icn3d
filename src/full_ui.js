@@ -9519,7 +9519,7 @@ iCn3DUI.prototype = {
         //var bExpandDialog = me.isMac() && !me.isMobile();
         var bExpandDialog = false;
 
-        if(id === me.pre + 'dl_selectresidues' || id === me.pre + 'dl_alignment' || id === me.pre + 'dl_filter') {
+        if(id === me.pre + 'dl_selectresidues' || id === me.pre + 'dl_alignment' || id === me.pre + 'dl_filter' || id === me.pre + 'dl_2ddiagram') {
             var filterWidth = (0.5 * me.WIDTH > 250) ? 250 : 0.5 * (me.WIDTH - me.LESSWIDTH);
             var dialogWidth = (id === me.pre + 'dl_filter') ? filterWidth : 0.5 * (me.WIDTH - me.LESSWIDTH);
 
@@ -9553,10 +9553,12 @@ iCn3DUI.prototype = {
                         var bSelectresidueInit = ($('#' + me.pre + 'dl_selectresidues').hasClass('ui-dialog-content')) ? true : false;
                         var bAlignmentInit = ($('#' + me.pre + 'dl_alignment').hasClass('ui-dialog-content')) ? true : false;
                         var bFilterInit = ($('#' + me.pre + 'dl_filter').hasClass('ui-dialog-content')) ? true : false;
+                        var b2DInit = ($('#' + me.pre + 'dl_2ddiagram').hasClass('ui-dialog-content')) ? true : false;
 
-                      if((id === me.pre + 'dl_selectresidues' && (!bAlignmentInit || $( '#' + me.pre + 'dl_alignment' ).dialog( 'isOpen' ) === false) && (!bFilterInit || $( '#' + me.pre + 'dl_filter' ).dialog( 'isOpen' ) === false) )
-                        || (id === me.pre + 'dl_alignment' && (!bSelectresidueInit || $( '#' + me.pre + 'dl_selectresidues' ).dialog( 'isOpen' ) === false) && (!bFilterInit || $( '#' + me.pre + 'dl_filter' ).dialog( 'isOpen' ) === false) )
-                        || (id === me.pre + 'dl_filter' && (!bAlignmentInit || $( '#' + me.pre + 'dl_alignment' ).dialog( 'isOpen' ) === false) && (!bSelectresidueInit || $( '#' + me.pre + 'dl_selectresidues' ).dialog( 'isOpen' ) === false) )
+                      if((id === me.pre + 'dl_selectresidues' && (!bAlignmentInit || $( '#' + me.pre + 'dl_alignment' ).dialog( 'isOpen' ) === false) && (!bFilterInit || $( '#' + me.pre + 'dl_filter' ).dialog( 'isOpen' ) === false) && (!b2DInit || $( '#' + me.pre + 'dl_2ddiagram' ).dialog( 'isOpen' ) === false))
+                        || (id === me.pre + 'dl_alignment' && (!bSelectresidueInit || $( '#' + me.pre + 'dl_selectresidues' ).dialog( 'isOpen' ) === false) && (!bFilterInit || $( '#' + me.pre + 'dl_filter' ).dialog( 'isOpen' ) === false) && (!b2DInit || $( '#' + me.pre + 'dl_2ddiagram' ).dialog( 'isOpen' ) === false) )
+                        || (id === me.pre + 'dl_filter' && (!bAlignmentInit || $( '#' + me.pre + 'dl_alignment' ).dialog( 'isOpen' ) === false) && (!bSelectresidueInit || $( '#' + me.pre + 'dl_selectresidues' ).dialog( 'isOpen' ) === false) && (!b2DInit || $( '#' + me.pre + 'dl_2ddiagram' ).dialog( 'isOpen' ) === false) )
+                        || (id === me.pre + 'dl_2ddiagram' && (!bAlignmentInit || $( '#' + me.pre + 'dl_alignment' ).dialog( 'isOpen' ) === false) && (!bSelectresidueInit || $( '#' + me.pre + 'dl_selectresidues' ).dialog( 'isOpen' ) === false) && (!bFilterInit || $( '#' + me.pre + 'dl_filter' ).dialog( 'isOpen' ) === false) )
                         ) {
                           me.resizeCanvas(me.WIDTH - me.LESSWIDTH, me.HEIGHT - me.LESSHEIGHT, true);
                       }
