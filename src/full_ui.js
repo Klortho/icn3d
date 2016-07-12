@@ -3850,7 +3850,7 @@ iCn3DUI.prototype = {
         if(me.cfg.cid === undefined) {
             html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_sequences'><span style='white-space:nowrap' class='icn3d-commandTitle' title='the selected structure'>View<br/>Sequence</span></button></div></td>";
 
-            html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_2ddiagram'><span style='white-space:nowrap' class='icn3d-commandTitle' title='Show the sequences of the selected structure'>View<br/>2D Diagram</span></button></div></td>";
+            html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_2ddiagram'><span style='white-space:nowrap' class='icn3d-commandTitle' title='Show the sequences of the selected structure'>View<br/>2D Interaction Network</span></button></div></td>";
 
             if(me.cfg.align !== undefined) {
                 html += "      <td valign='top'><div style='margin:3px 0px 0px 10px;'><button style='-webkit-appearance:" + buttonStyle + "; height:36px;' id='" + me.pre + "show_alignsequences'><span style='white-space:nowrap' class='icn3d-commandTitle' title='Show the sequences of the aligned structures'>Aligned<br/>Sequence</span></button></div></td>";
@@ -6159,7 +6159,7 @@ iCn3DUI.prototype = {
           console.log(cy);
           console.log($('#'+me.pre+'cy'));
           console.log(me.icn3d.intrac);
-             me.openDialog(me.pre + 'dl_2ddiagram', '2D Diagram');
+             me.openDialog(me.pre + 'dl_2ddiagram', '2D Interaction Network');
         });
     },
 
