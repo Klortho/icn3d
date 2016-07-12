@@ -95,6 +95,7 @@ var iCn3DUI = function(cfg) {
 
     me.intrac={};
     me.molid2color = {};
+    me.molid2chainid= {};
 };
 
 iCn3DUI.prototype = {
@@ -8410,7 +8411,7 @@ iCn3DUI.prototype = {
             dataType: 'jsonp',
             success: function( data ) {
             me.icn3d.intrac = data;
-            console.log("intrac data:", me.icn3d.intrac);
+            //console.log("intrac data:", me.icn3d.intrac);
         }
       });
       return true;
@@ -8464,7 +8465,14 @@ iCn3DUI.prototype = {
                 var color = '#' + ( '000000' + data.molid2rescount[i].color.toString( 16 ) ).slice( - 6 );
                   me.molid2color[i] = color;
             }
-            console.log(me.molid2color);
+
+	    // molid2ChainId
+            for(var i in data.molid2chain) {
+                  me.molid2chainid[i] = data.molid2chain[i].chain;
+	    }
+	    
+            //console.log("molid2color:", me.molid2color);
+            //console.log("molid2chainid:", me.molid2chainid);
 
             if ((me.cfg.inpara !== undefined && me.cfg.inpara.indexOf('mols=') != -1) || (data.atomcount <= data.threshold && data.atoms !== undefined) ) {
                 // small structure with all atoms
