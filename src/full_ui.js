@@ -8405,7 +8405,7 @@ iCn3DUI.prototype = {
     };
 
     iCn3DUI.prototype.downloadIntrac = function(mmdbid) {var me = this;
-        var url="http://www.ncbi.nlm.nih.gov/Structure/mmdb2/mmdb_strview.cgi?uid=1tup&format=json&intrac=1";
+        var url="http://www.ncbi.nlm.nih.gov/Structure/mmdb2/mmdb_strview.cgi?uid="+mmdbid+"&format=json&intrac=1";
         $.ajax({
             url: url,
             dataType: 'jsonp',
