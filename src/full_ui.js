@@ -6114,7 +6114,27 @@ iCn3DUI.prototype = {
     clickShow_2ddiagram: function() { var me = this;
         $("#" + me.pre + "show_2ddiagram").click(function(e) {
     //       e.preventDefault();
+          var elems = me.intracToCytoscape(me.icn3d.intrac.intrac);
 
+          var cy = cytoscape({
+            container: $('#'+me.pre+'cy'),
+            boxSelectionEnabled: false,
+            autounselectify: true,
+
+            elements: elems,
+  
+            //   layout: {
+            //     name: 'cose',
+            //     padding: 10
+            //   }
+            layout: {
+                name: 'preset',
+                padding: 10
+              }
+            });
+          console.log(cy);
+          console.log($('#'+me.pre+'cy'));
+          console.log(me.icn3d.intrac);
              me.openDialog(me.pre + 'dl_2ddiagram', '2D Diagram');
         });
     },
@@ -8367,7 +8387,7 @@ iCn3DUI.prototype = {
             dataType: 'jsonp',
             success: function( data ) {
             me.icn3d.intrac = data;
-            console.log("intrac data:", me.intrac);
+            console.log("intrac data:", me.icn3d.intrac);
         }
       });
       return true;
