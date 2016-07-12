@@ -6115,7 +6115,7 @@ iCn3DUI.prototype = {
     clickShow_2ddiagram: function() { var me = this;
         $("#" + me.pre + "show_2ddiagram").click(function(e) {
     //       e.preventDefault();
-          var elems = me.intracToCytoscape(me.icn3d.intrac.intrac, me.molid2color);
+          var elems = me.intracToCytoscape();
 
           var cy = cytoscape({
             container: $('#'+me.pre+'cy'),
@@ -9683,7 +9683,10 @@ iCn3DUI.prototype = {
     
     /* Convert an inner intrac datastructure (icn3D.intrac.intrac) to a cytoscape graph
      */
-    iCn3DUI.prototype.intracToCytoscape = function(intrac,colors) {
+    iCn3DUI.prototype.intracToCytoscape = function() { var me = this;
+      var intrac = me.icn3d.intrac.intrac;
+      var colors = me.molid2color;
+      var labels = me.molid2chainid;
       var nodes = [];
       var edges = [];
       for (var name in intrac) {
@@ -9708,13 +9711,17 @@ iCn3DUI.prototype = {
           }
       
           var col = "grey";
+          var label = name;
           if(name in colors) {
             col = colors[name];
+          }
+          if(name in labels) {
+            label = labels[name];
           }
           var node = {
             "data" : {
               "id" : name,
-              "label" : name,
+              "label" : label,
               "color" : col,
               "NodeType":nodetype
             },
