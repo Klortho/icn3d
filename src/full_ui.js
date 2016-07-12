@@ -6114,7 +6114,7 @@ iCn3DUI.prototype = {
     clickShow_2ddiagram: function() { var me = this;
         $("#" + me.pre + "show_2ddiagram").click(function(e) {
     //       e.preventDefault();
-          var elems = me.intracToCytoscape(me.icn3d.intrac.intrac);
+          var elems = me.intracToCytoscape(me.icn3d.intrac.intrac, me.molid2color);
 
           var cy = cytoscape({
             container: $('#'+me.pre+'cy'),
@@ -6122,7 +6122,30 @@ iCn3DUI.prototype = {
             autounselectify: true,
 
             elements: elems,
-  
+            style: [
+              {
+                selector: 'node',
+                style: {
+                  "background-color" : 'data(color)',
+                  'content': 'data(label)',
+                }
+              },{
+                selector: 'node[NodeType="protein"]',
+                style: {
+                  "shape" : "circle"
+                }
+              },{
+                selector: 'node[NodeType="nucleotide"]',
+                style: {
+                  "shape" : "rectangle",
+                }
+              },{
+                selector: 'node[NodeType="ligand"]',
+                style: {
+                  "shape" : "diamond",
+                }
+              },
+              ],
             //   layout: {
             //     name: 'cose',
             //     padding: 10
@@ -9650,30 +9673,42 @@ iCn3DUI.prototype = {
         }
     };
     
-    iCn3DUI.prototype.intracToCytoscape = function(intrac) {
+    /* Convert an inner intrac datastructure (icn3D.intrac.intrac) to a cytoscape graph
+     */
+    iCn3DUI.prototype.intracToCytoscape = function(intrac,colors) {
       var nodes = [];
       var edges = [];
       for (var name in intrac) {
         if (intrac.hasOwnProperty(name)) {
           var props = intrac[name];
-          var x,y;
+          var x,y,nodetype;
           if(props.shape == "rect") {
             x = (props.coords[0][0] + props.coords[0][2])/2;
             y = (props.coords[0][1] + props.coords[0][3])/2;
+            nodetype="nucleotide";
           } else if(props.shape == "circle") {
             x = props.coords[0][0];
             y = props.coords[0][1];
+            nodetype="protein";
           } else if(props.shape == "poly") {
             //TODO
             x = props.coords[0][0];
             y = props.coords[0][1];
+            nodetype="ligand";
           } else {
             console.log("Ignoring "+name+" due to unknown shape "+props.shape);
+          }
+      
+          var col = "grey";
+          if(name in colors) {
+            col = colors[name];
           }
           var node = {
             "data" : {
               "id" : name,
               "label" : name,
+              "color" : col,
+              "NodeType":nodetype
             },
             "position" : {
               "x":x,
