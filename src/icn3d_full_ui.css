@@ -1,10 +1,15 @@
+.icn3d-text {font-family: Verdana, Arial, Helvetica, sans-serif; font-size:1em;}
+
 .ui-dialog { font-size: 12px;}
 .ui-dialog .ui-dialog-title { font-size: 16px; height: 18px; }
 .ui-dialog .ui-button { width: 12px; height:12px; margin: -5px 0px 0px 0px;}
 .ui-dialog .ui-dialog-titlebar { padding: 0px 1em 2px 1em; }
 
+.ui-accordion .ui-accordion-icons { padding-left: 0; text-align: center; }
+
 accordion {font-size: 14px!important; z-index:1999; }
 accordion h3 {width: 60px; font-size: 14px!important;}
+accordion h3 > .ui-icon { display: none !important; }
 accordion > ul {width: 60px;}
 accordion ul ul {width: 160px;}
 accordion ul li {cursor:default!important; white-space:nowrap;}
@@ -18,7 +23,8 @@ accordion ul .icn3d-link, div .icn3d-link, accordion li input, accordion li labe
 .icn3d-residueNum {color: #00FF00; width:30px!important; text-align:center;}
 
 .icn3d-dl_sequence span {display:inline-block; font-size:11px; width:10px;}
-
+.icn3d-dl_2ddiagram {} //{min-width: 150px!important; min-height: 150px!important;}
+ 
 button, select, input { font-size: 10px; }
 
 .icn3d-hidden {display: none;}
@@ -28,6 +34,7 @@ button, select, input { font-size: 10px; }
 .icn3d-seqLine {white-space:nowrap;}
 
 .icn3d-commandTitle  {font-size: 12px; font-weight:bold; font-family: Verdana, Arial, Helvetica, sans-serif; color: #666666;}
+.icn3d-modeselection  {color: #f8b84e!important;}
 
 .icn3d-middleIcon {opacity: 1.0}
 .icn3d-endIcon {opacity: 0.2}
@@ -39,3 +46,69 @@ button, select, input { font-size: 10px; }
 .icn3d-ncons {}
 .icn3d-nalign {} // {font-style: italic;}
 
+.icn3d-node {cursor:pointer!important; } 
+.icn3d-interaction {cursor:pointer!important; } 
+
+.ui-dialog .ui-resizable-se {
+    width: 14px;
+    height: 14px;
+    right: 3px;
+    bottom: 3px;
+    background-position: -80px -224px;
+}
+
+// toggle button: http://www.w3schools.com/howto/howto_css_switch.asp
+.icn3d-switch {
+  position: relative;
+  display: inline-block;
+  width: 33px;
+  height: 18px;
+}
+
+.icn3d-switch input {display:none;}
+
+.icn3d-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.icn3d-slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .icn3d-slider {
+  background-color: #f8b84e;
+}
+
+input:focus + .icn3d-slider {
+  box-shadow: 0 0 1px #f8b84e;
+}
+
+input:checked + .icn3d-slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+.icn3d-slider.icn3d-round {
+  border-radius: 18px;
+}
+
+.icn3d-slider.icn3d-round:before {
+  border-radius: 50%;
+}

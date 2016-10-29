@@ -2,7 +2,7 @@
 
 ## iCn3D
 
-"I see in 3D" (iCn3D) Structure Viewer is a WebGL-based 3D viewer using Three.js and jQuery. It is based on the 3D styles of [iview](http://istar.cse.cuhk.edu.hk/iview/) and [GLmol](https://en.osdn.jp/projects/webglmol/), and the surface generation of [3Dmol](http://3dmol.csb.pitt.edu/). iCn3D has a feature-rich user interface and allows users to: use a url or a state file to capture the custom display of 3D structures, define custom atom sets, show both 3D structure and 1D sequence together and select residues on both of them, display custom labeling, go back and forth to different stage, show highlight, etc. iCn3D can also show the aligned 3D structures by providing two PDB IDs or MMDB IDs, whose alignment has been pre-calculated at NCBI.  
+"I see in 3D" (iCn3D) Structure Viewer is a WebGL-based 3D viewer using Three.js and jQuery. It is based on the 3D styles of [iview](http://istar.cse.cuhk.edu.hk/iview/) and [GLmol](https://webglmol.osdn.jp/index-en.html), and the surface generation of [3Dmol](https://3dmol.csb.pitt.edu/). iCn3D has a feature-rich user interface and allows users to: use a url or a state file to capture the custom display of 3D structures, define custom atom sets, show 3D structure, 2D interactions, and 1D sequence together and select residues on all of them, display custom labeling, go back and forth to different stage, show highlight, etc. iCn3D can also show the aligned 3D structures by providing two PDB IDs or MMDB IDs, whose alignment has been pre-calculated at NCBI.  
 
 We provided two versions of iCn3D widgets: [basic interface](https://www.ncbi.nlm.nih.gov/Structure/icn3d/index.html?mmdbid=2por) and [advanced interface](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=2por). 
 
@@ -11,20 +11,23 @@ We provided two versions of iCn3D widgets: [basic interface](https://www.ncbi.nl
 
 Either of these widgets could be easily added to your own web pages. Please see the [help page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d.html) for more details.
 
-<b>Complete package</b> of iCn3D including Three.js and jQuery can be downloaded from [https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.0.1.zip](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.0.1.zip). The "Download ZIP" link in this page does not include these third-party libraries. 
+<b>Complete package</b> of iCn3D including Three.js and jQuery can be downloaded from [https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.3.2.zip](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.3.2.zip). The "Download ZIP" link in this page does not include these third-party libraries. 
 
 ## Usage
 
-iCn3D page accepts the following IDs:
+iCn3D accepts the following IDs:
 
+* <b>mmdbid</b>: NCBI MMDB ID, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=2por&showseq=1&show2d=1](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=2por&showseq=1&show2d=1)
+* <b>mmtfid</b>: MMTF ID, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmtfid=2por](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmtfid=2por)
 * <b>pdbid</b>: PDB ID, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?pdbid=2por](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?pdbid=2por)
 * <b>mmcifid</b>: mmCIF ID, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmcifid=2por](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmcifid=2por)
-* <b>mmdbid</b>: NCBI MMDB ID, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=2por](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=2por)
 * <b>gi</b>: NCBI protein gi number, [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?gi=827343227](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?gi=827343227)
 * <b>cid</b>: PubChem Compound ID, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?cid=2244](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?cid=2244)
 * <b>align</b>: Two PDB IDs or MMDB IDs for structure alignment, e.g., [https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?align=1hho,4n7n](https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?align=1hho,4n7n)
 
-See the [help page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d.html) for more details on these parameters.
+iCn3D also accepts the following file types: PDB, mmCIF, Mol2, SDF, and XYZ. The files can be passed through a url, e.g., <a href="https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?type=pdb&url=https%3A%2F%2Ffiles.rcsb.org%2Fview%2F1gpk.pdb">https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?type=pdb&url=https%3A%2F%2Ffiles.rcsb.org%2Fview%2F1gpk.pdb</a>:
+
+See the [help page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/docs/icn3d_help.html) or the [API page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d.html) for more details.
 
 
 ## Third-party libraries used
@@ -35,9 +38,9 @@ See the [help page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d.html) for
 
 ## Tools based on
 
-* **[iview](http://istar.cse.cuhk.edu.hk/iview/)**: iCn3D is mainly based on iview.
-* **[GLmol](https://en.osdn.jp/projects/webglmol/)**: Drawing cartoon of nucleotides is from GLmol.
-* **[3Dmol](http://3dmol.csb.pitt.edu/)**: The surface generation and labeling are from 3Dmol.
+* **[iview](http://istar.cse.cuhk.edu.hk/iview/)**: The drawing of 3D objects is mainly based on iview.
+* **[GLmol](https://webglmol.osdn.jp/index-en.html)**: The drawing of nucleotides cartoon is from GLmol.
+* **[3Dmol](https://3dmol.csb.pitt.edu/)**: The surface generation and labeling are from 3Dmol.
 
 ## Building
 
@@ -71,7 +74,7 @@ npm install -g http-server
 http-server
 ```
 
-Then point your browser at http://localhost:8080/icn3d.html.
+Then point your browser at https://localhost:8080/icn3d.html.
 
 Run `gulp help` to get a list of the available tasks.
 
@@ -86,7 +89,19 @@ gulp gh-pages
 
 ## Change log
 
-The production version [icn3d-1.0.1](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.0.1.zip) was release on May 16, 2016. All previous releases can be found at the [help page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d.html#log).
+The production version [icn3d-1.3.2](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.3.2.zip) was release on October 18, 2016. The atom specification in "Advanced set selection" was modified to use "$" instead of "#" in front of structure IDs. This modification avoids to the problem of showing multiple "#" in the urls of "Share Link".
+
+The production version [icn3d-1.3.1](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.3.1.zip) was release on October 4, 2016. Partial diplay of helices or beta-sheets are enabled. The side chains, if displayed, are connected to C-alphas.
+
+The production version [icn3d-1.2.3](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.2.3.zip) was release on September 13, 2016. The MMTF format started to support https.
+
+The production version [icn3d-1.2.2](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.2.2.zip) was release on August 24, 2016. Added a switch button to switch between all atoms and selected atoms. When the mode is "selected atoms", the switch and the text "selection" next to it are colored in orange. The menu "Style", "Color", and "Surface" are colored in orange and only apply to selected atoms.
+
+The production version [icn3d-1.2.1](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.2.1.zip) was release on August 18, 2016. Some bugs were fixed.
+
+The production version [icn3d-1.2.0](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d-1.2.0.zip) was release on August 17, 2016. The dialog of 2D interactions was added to show the interactions among different chains. Both the nodes (chains) and lines (interactions) can be selected. Secondary structures will be calculated if the input PDB file has no defined secondary structure information. The previous files src/icn3d.js, src/full_ui.js, and src/simple_ui.js were separated into small files.
+
+All previous releases can be found at the [API page](https://www.ncbi.nlm.nih.gov/Structure/icn3d/icn3d.html#log).
 
 ## Contact
 
